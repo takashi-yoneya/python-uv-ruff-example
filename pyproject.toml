@@ -1,0 +1,57 @@
+[project]
+name = "python-uv-ruff-example"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115.2",
+    "pydantic-settings>=2.5.2",
+    "pydantic>=2.9.2",
+    "uvicorn>=0.31.1",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "mypy>=1.11.2",
+    "pytest>=8.3.3",
+    "pytest-mock>=3.14.0",
+    "requests-mock>=1.12.1",
+    "ruff>=0.6.9",
+]
+
+[tool.ruff]
+# 1行の最大文字数
+line-length = 88
+
+[tool.ruff.lint]
+# チェックするエラーの種類
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "B",  # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "UP",  # pyupgrade
+]
+# 除外するエラーの種類
+ignore = [
+    "E501",  # line too long, handled by black
+    "B008",  # do not perform function calls in argument defaults
+    "C901",  # too complex
+    "W191",  # indentation contains tabs
+    "B904", # raise ... from ... になっていない場合のエラーを無視
+]
+
+# ファイルごとのエラー除外
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
+
+# isort の設定
+[tool.ruff.lint.isort]
+known-third-party = ["fastapi", "pydantic", "starlette"]
+
+[tool.ruff.lint.pyupgrade]
+# Python3.8互換のための設定
+keep-runtime-typing = true
